@@ -1,7 +1,8 @@
+import React from 'react';
 import Login from '../assets/Site Assets/login_img.png'
 import Logo from "../assets/Site Assets/Logo.png"
 import { User, Lock } from "lucide-react";
-
+import { Link } from 'react-router-dom';
 
 function LoginPage() {
   return (
@@ -46,12 +47,12 @@ function LoginPage() {
                   Login
                 </button>
                 <div className="flex justify-center">
-                  <button
-                    type="button"
-                    className='font-mono text-fg '
+                 <Link
+                    to="/forgot-password"               
+                    className='font-mono text-fg hover:text-gold transition-colors '
                   >
                     Forgot Password?
-                  </button>
+                  </Link>
                 </div>
 
 
