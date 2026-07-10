@@ -3,7 +3,7 @@ import Sidebar from './Components/sidebar';
 import SearchBar from './Components/searchBar';
 import LoginPage from './Components/loginPage';
 import NotificationPage from './Components/NotificationPage';
-import { Routes, Route } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 const ForgotPasswordPage = () => (
   <div className="flex items-center justify-center w-screen h-screen bg-[#0a0a0a] text-white font-mono flex-col space-y-4">
@@ -20,30 +20,33 @@ const ForgotPasswordPage = () => (
   </div>
 );
 
+// Define the updated application routes array structure
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <LoginPage />,
+  },
+  {
+    path: "/forgot-password",
+    element: <ForgotPasswordPage />,
+  },
+  {
+    path: "/notifications",
+    element: (
+      <div className="flex w-screen h-screen overflow-hidden bg-[#0a0a0a]">
+        <Sidebar active="notifications" />
+        <div className="flex-1 h-full overflow-y-auto p-6 flex flex-col items-start space-y-6">
+          <SearchBar />
+          <NotificationPage />
+        </div>
+      </div>
+    ),
+  },
+  // You can append paths for /tools, /report, etc., down here following the same format as above if needed!
+]);
+
 function App() {
-  return (
-    <Routes>
-
-      <Route path="/" element={<LoginPage />} />
-
-     
-      <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-
-
-      <Route 
-        path="/notifications" 
-        element={
-          <div className="flex w-screen h-screen overflow-hidden bg-[#0a0a0a]">
-            <Sidebar active="notifications" />
-            <div className="flex-1 h-full overflow-y-auto p-6 flex flex-col items-start space-y-6">
-              <SearchBar />
-              <NotificationPage />
-            </div>
-          </div>
-        } 
-      />
-    </Routes>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
